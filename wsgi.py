@@ -1,4 +1,4 @@
-﻿import os, sys
+import os, sys
 
 DIRNAME=os.path.abspath(os.path.join(os.path.dirname(__file__),".."))
 
@@ -10,22 +10,16 @@ application = django.core.handlers.wsgi.WSGIHandler()
 import isapi_wsgi
 # The entry points for the ISAPI extension.
 def __ExtensionFactory__():
-return isapi_wsgi.ISAPISimpleHandler(application)
+    return isapi_wsgi.ISAPISimpleHandler(application)
 if __name__=='__main__':
 # If run from the command-line, install ourselves.
-from isapi.install import *
-params = ISAPIParameters()
+    from isapi.install import *
+    params = ISAPIParameters()
 # Setup the virtual directories - this is a list of directories our
 # extension uses - in this case only 1.
 # Each extension has a "script map" - this is the mapping of ISAPI
 # extensions.
-sm = [
-ScriptMapParams(Extension="*", Flags=0)
-]
-vd = VirtualDirParameters(Name="DepOA",
-Description = "ISAPI-WSGI ISAPISimpleHandler Django DepOA",
-ScriptMaps = sm,
-ScriptMapUpdate = "replace"
-)
-params.VirtualDirs = [vd]
-HandleCommandLine(params)
+    sm = [ScriptMapParams(Extension="*", Flags=0)]
+    vd = VirtualDirParameters(Name="DepOA",Description = "ISAPI-WSGI ISAPISimpleHandler Django DepOA",ScriptMaps = sm,ScriptMapUpdate = "replace")
+    params.VirtualDirs = [vd]
+    HandleCommandLine(params)
