@@ -8,8 +8,6 @@ DepOA
 
 * **grappelli**  *美化admin界面*
 
-* **etherpad-lite**  *在线文档编辑*
-
 
 ## 功能设计
 
